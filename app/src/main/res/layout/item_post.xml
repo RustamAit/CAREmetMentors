@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:background="@color/colorWhite"
+        android:layout_marginTop="4dp"
+        style="@style/Widget.MaterialComponents.CardView"
+        android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+        <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/postPhoto"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:visibility="gone"
+        />
+
+        <TextView
+                android:id="@+id/postTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"
+                android:text="Очень интересная история"
+                android:visibility="gone"
+                style="@style/TextAppearance.MaterialComponents.Headline6"
+        />
+
+        <TextView
+                android:id="@+id/postText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="16dp"
+                android:paddingBottom="16dp"
+                android:paddingEnd="24dp"
+                android:text="Очень описание истории в которой расказщик восторгается эмоциям полученным во время встречи с ребенком"
+                style="@style/TextAppearance.MaterialComponents.Body2"
+        />
+
+    </LinearLayout>
+
+
+</com.google.android.material.card.MaterialCardView>

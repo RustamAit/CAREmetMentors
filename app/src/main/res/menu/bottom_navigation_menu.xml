@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navMainScreen"
+        android:title="Главное"
+        android:icon="@drawable/ic_home_black_24dp"
+         />
+    <item
+        android:title="Чат"
+        android:id="@+id/navChat"
+        android:icon="@drawable/ic_chat_black_24dp"
+    />
+    <item
+        android:id="@+id/navEvents"
+        android:title="События"
+        android:icon="@drawable/ic_event_black_24dp"
+    />
+    <item
+            android:id="@+id/navReports"
+            android:title="Отчеты"
+            android:icon="@drawable/ic_assignment_black_24dp"
+    />
+    <item
+            android:id="@+id/navProfile"
+            android:title="Профиль"
+            android:icon="@drawable/ic_person_black_24dp"
+    />
+</menu>
