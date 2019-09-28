@@ -8,7 +8,7 @@ import com.google.android.material.snackbar.Snackbar
 import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.activity_sign_in.*
 import kz.caremet.mentors.android_client_app.R
-import kz.caremet.mentors.android_client_app.core.DataEntities
+import kz.caremet.mentors.android_client_app.core.data.DataEntities
 import kz.caremet.mentors.android_client_app.views.MainPage.MainActivity
 import kz.caremet.mentors.android_client_app.views.signIn.viewModel.SignInViewModel
 import org.koin.android.ext.android.inject
@@ -27,12 +27,13 @@ class SignInActivity : AppCompatActivity() {
 
         doneBtn?.setOnClickListener {
             if(validateData()){
-                viewModel.signIn(DataEntities.SignInData(
+                viewModel.signIn(
+                    DataEntities.SignInData(
                     emailTextInputEditText.text.toString(),
                     passwordTextInputEditText.text.toString()
                 )).observeOn(AndroidSchedulers.mainThread())
                     .subscribe { mentor ->
-                        if(mentor.id == 0){
+                        if(mentor.real_id == 0){
                             AlertDialog.Builder(this)
                                 .setTitle("К сожалению произошла ошибка")
                                 .setMessage("Возможно вы ввели некоректные данные, произошла ошибка на беке, либо у вас нет интернета\n" +

@@ -1,7 +1,7 @@
 package kz.caremet.mentors.android_client_app.views.signUp.viewModel
 
 import io.reactivex.Single
-import kz.caremet.mentors.android_client_app.core.DataEntities
+import kz.caremet.mentors.android_client_app.core.data.DataEntities
 
 interface InfoFragmentsViewModel {
 

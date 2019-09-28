@@ -1,6 +1,11 @@
 package kz.caremet.mentors.android_client_app.core
 
-import android.content.Context
+import com.tinder.scarlet.Lifecycle
+import com.tinder.scarlet.Scarlet
+import com.tinder.scarlet.messageadapter.gson.GsonMessageAdapter
+import com.tinder.scarlet.streamadapter.rxjava2.RxJava2StreamAdapterFactory
+import com.tinder.scarlet.websocket.ShutdownReason
+import com.tinder.scarlet.websocket.okhttp.OkHttpWebSocket
 import kz.caremet.mentors.android_client_app.core.utils.Logger
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -21,24 +26,23 @@ fun createOkHttpClient(): OkHttpClient {
         .build()
 }
 
-//inline fun <reified T>createWebSocketService(okHttpClient: OkHttpClient, url: String, lifecycle: Lifecycle): T{
-//    val protocol = OkHttpWebSocket(
-//        okHttpClient,
-//        OkHttpWebSocket.SimpleRequestFactory(
-//            { Request.Builder().url(url).build() },
-//            { ShutdownReason.GRACEFUL }
-//        )
-//    )
-//
-//    val configuration = Scarlet.Configuration(
-//        messageAdapterFactories = listOf(GsonMessageAdapter.Factory()),
-//        streamAdapterFactories = listOf(RxJava2StreamAdapterFactory()),
-//        lifecycle = lifecycle
-//    )
-//    val scarlet = Scarlet(protocol,configuration)
-//    return scarlet.create(T::class.java)
-//}
+inline fun <reified T>createWebSocketService(okHttpClient: OkHttpClient, url: String, lifecycle: Lifecycle): T{
+    val protocol = OkHttpWebSocket(
+        okHttpClient,
+        OkHttpWebSocket.SimpleRequestFactory(
+            { Request.Builder().url(url).build() },
+            { ShutdownReason.GRACEFUL }
+        )
+    )
 
+    val configuration = Scarlet.Configuration(
+        messageAdapterFactories = listOf(GsonMessageAdapter.Factory()),
+        streamAdapterFactories = listOf(RxJava2StreamAdapterFactory()),
+        lifecycle = lifecycle
+    )
+    val scarlet = Scarlet(protocol,configuration)
+    return scarlet.create(T::class.java)
+}
 
 
 inline fun <reified T> createService(okHttpClient: OkHttpClient, url: String): T {

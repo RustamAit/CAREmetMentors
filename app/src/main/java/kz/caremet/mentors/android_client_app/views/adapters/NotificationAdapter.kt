@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_notiffication.view.*
 import kz.caremet.mentors.android_client_app.R
-import kz.caremet.mentors.android_client_app.core.DataEntities
+import kz.caremet.mentors.android_client_app.core.data.DataEntities
 
 class NotificationAdapter(val dataset: List<DataEntities.Notification>): RecyclerView.Adapter<NotificationAdapter.NotificationViewHolder>()  {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotificationViewHolder {

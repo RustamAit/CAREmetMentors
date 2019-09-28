@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_home.*
 
 import kz.caremet.mentors.android_client_app.R
-import kz.caremet.mentors.android_client_app.core.DataEntities
+import kz.caremet.mentors.android_client_app.core.data.DataEntities
 import kz.caremet.mentors.android_client_app.views.adapters.NotificationAdapter
 import kz.caremet.mentors.android_client_app.views.adapters.PostAdapter
 
@@ -39,7 +39,8 @@ class HomeFragment : Fragment() {
         val notificationDataset = ArrayList<DataEntities.Notification>()
 
         for(i in 0..3){
-            notificationDataset.add(DataEntities.Notification("Очень важное уведомление",
+            notificationDataset.add(
+                DataEntities.Notification("Очень важное уведомление",
                 "notmalniy",
                 "Это очень важное уведомление в котором мы пытаемся донести очень важную и полезную инфу"))
         }

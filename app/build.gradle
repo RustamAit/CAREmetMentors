@@ -11,14 +11,18 @@ android {
     compileSdkVersion 29
     defaultConfig {
         applicationId "kz.caremet.mentors.android_client_app"
-        minSdkVersion 17
+        minSdkVersion 19
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
-
     }
+
+    compileOptions {
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -61,8 +65,11 @@ dependencies {
     kapt 'com.github.bumptech.glide:compiler:4.8.0'
     implementation "com.github.tinder.scarlet:scarlet-lifecycle-android:0.2.4"
     implementation "com.github.tinder.scarlet:scarlet-protocol-websocket-okhttp:0.2.4"
+    implementation 'com.github.tinder.scarlet:scarlet:0.2.4'
     implementation "com.github.tinder.scarlet:scarlet-message-adapter-gson:0.2.4"
     implementation 'com.github.tinder.scarlet:scarlet-protocol-socketio-client:0.2.4'
     implementation 'com.github.tinder.scarlet:scarlet-stream-adapter-rxjava2:0.2.4'
+    implementation "androidx.work:work-runtime-ktx:${work_version}"
+    implementation "androidx.work:work-rxjava2:${work_version}"
 
 }

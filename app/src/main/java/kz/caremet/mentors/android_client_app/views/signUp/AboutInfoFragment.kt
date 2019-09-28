@@ -13,7 +13,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.fragment_about_info.*
 
 import kz.caremet.mentors.android_client_app.R
-import kz.caremet.mentors.android_client_app.core.DataEntities
+import kz.caremet.mentors.android_client_app.core.data.DataEntities
 import kz.caremet.mentors.android_client_app.views.signUp.viewModel.FragmentSharedViewModel
 import kz.caremet.mentors.android_client_app.views.signUp.viewModel.InfoFragmentsViewModel
 import org.koin.android.ext.android.inject
@@ -61,9 +61,11 @@ class AboutInfoFragment : Fragment() {
 
                 sharedViewModel.getQuestionaryData()?.let { data ->
                     viewModel.signIn(data).observeOn(AndroidSchedulers.mainThread())
-                        .subscribe { it ->
+                        .subscribe { userData ->
                             Log.d("HEHEHEHEHE", "HAHAHAHAHA")
-                            if(it.id == 0){
+                            Log.d("HEHEHEHEHE", userData.real_id.toString())
+
+                            if(userData.real_id == 0){
                                 activity?.let {
                                     AlertDialog.Builder(activity!!)
                                         .setTitle("К сожалению произошла ошибка")
@@ -74,7 +76,6 @@ class AboutInfoFragment : Fragment() {
                                         }
                                         .show()
                                 }
-
                             }
                             else{
                                 (activity as? GeneralInfoInteractionListener)?.startSuccessFragment()

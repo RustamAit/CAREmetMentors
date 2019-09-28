@@ -1,6 +1,6 @@
 package kz.caremet.mentors.android_client_app.views.signUp.viewModel
 
-import kz.caremet.mentors.android_client_app.core.DataEntities
+import kz.caremet.mentors.android_client_app.core.data.DataEntities
 
 class FragmentSharedViewModelImpl(): FragmentSharedViewModel{
     var generalInfo: DataEntities.GeneralInfo? = null

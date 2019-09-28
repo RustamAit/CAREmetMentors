@@ -1,7 +1,7 @@
 package kz.caremet.mentors.android_client_app.repository.services
 
 import io.reactivex.Single
-import kz.caremet.mentors.android_client_app.core.DataEntities
+import kz.caremet.mentors.android_client_app.core.data.DataEntities
 import retrofit2.http.Body
 import retrofit2.http.POST
 

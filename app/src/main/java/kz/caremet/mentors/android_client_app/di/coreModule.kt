@@ -3,7 +3,8 @@ package kz.caremet.mentors.android_client_app.di
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.room.Room
-import kz.caremet.mentors.android_client_app.core.AppDatabase
+import com.tinder.scarlet.lifecycle.android.AndroidLifecycle
+import kz.caremet.mentors.android_client_app.core.data.AppDatabase
 import kz.caremet.mentors.android_client_app.core.Constants
 import kz.caremet.mentors.android_client_app.core.createOkHttpClient
 import kz.caremet.mentors.android_client_app.repository.sharedPreferences.LocalSharedPref
@@ -25,7 +26,7 @@ val coreModule = module {
     single { createOkHttpClient() }
 
 
-   // single(named("foregroundWithLogin")) { AndroidLifecycle.ofApplicationForeground(get()).combineWith(LoggedInLifecycle())}
+    single(named("foregroundWithLogin")) { AndroidLifecycle.ofApplicationForeground(get())}
 }
 
 

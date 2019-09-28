@@ -3,12 +3,29 @@ package kz.caremet.mentors.android_client_app.repository.sharedPreferences
 import android.content.SharedPreferences
 
 class LocalSharedPrefImpl(private val pref: SharedPreferences): LocalSharedPref{
-    override fun setCurrentMentorId(mentorId: Int) {
+
+    override fun getCurrentMentorId(): String? {
+        return pref.getString("mentorIdString", null)
+    }
+
+    override fun setCurrentMentorId(mentorId: String) {
+        pref.edit().putString("mentorIdString", mentorId).apply()
+    }
+
+    override fun setCurrentRealMentorId(mentorId: Int) {
         pref.edit().putInt("mentorId", mentorId).apply()
     }
 
-    override fun getCurrentMentorId(): Int {
+    override fun getCurrentRealMentorId(): Int {
         return pref.getInt("mentorId", 0)
+    }
+
+    override fun getCurrentMentorName(): String {
+        return pref.getString("mentorName","неизветный")!!
+    }
+
+    override fun setCurrentMentorName(mentorName: String) {
+        pref.edit().putString("mentorName", mentorName).apply()
     }
 
 }

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   android:layout_width="match_parent"
+                                                   android:background="@color/colorWhite"
+                                                   android:id="@+id/mainLayout"
+                                                   android:layout_height="wrap_content">
+
+
+    <RelativeLayout
+            android:id="@+id/avatarLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" >
+
+
+        <TextView
+                android:id="@+id/senderPhotoText"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:background="@drawable/circle"
+                android:padding="8dp"
+                android:fontFamily="@font/raleway"
+                android:textAlignment="center"
+                android:textColor="@color/colorWhite"
+                android:textSize="14sp"
+                android:text="A"
+                android:textStyle="bold" />
+
+    </RelativeLayout>
+
+
+
+
+    <TextView
+            android:id="@+id/sender_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="4dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/raleway"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintEnd_toStartOf="@+id/created_at"
+            app:layout_constraintStart_toEndOf="@+id/avatarLayout"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+            android:id="@+id/position"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:visibility="gone"
+            android:fontFamily="@font/raleway"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@+id/avatarLayout"
+            app:layout_constraintTop_toBottomOf="@+id/sender_name" />
+
+    <TextView
+            android:id="@+id/text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingRight="8dp"
+            android:textIsSelectable="true"
+            android:fontFamily="@font/raleway"
+            android:textSize="16sp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="12dp"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/avatarLayout"
+            app:layout_constraintTop_toBottomOf="@+id/sender_name"
+    />
+
+
+    <ImageView
+            android:id="@+id/isSended"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:layout_marginEnd="4dp"
+            app:srcCompat = "@drawable/ic_access_time_black_24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text" />
+
+    <TextView
+            android:id="@+id/created_at"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="10dp"
+            android:text="TextView"
+            android:textColor="@color/lightGrey"
+            android:textSize="12sp"
+            android:visibility="gone"
+            android:fontFamily="@font/raleway"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

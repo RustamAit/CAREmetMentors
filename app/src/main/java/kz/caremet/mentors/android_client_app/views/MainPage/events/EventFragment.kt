@@ -11,7 +11,6 @@ import kz.caremet.mentors.android_client_app.R
 
 class EventFragment : Fragment() {
 
-//    private var listener: OnFragmentInteractionListener? = null
 
 
     override fun onCreateView(
@@ -21,20 +20,6 @@ class EventFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_event, container, false)
     }
 
-//    override fun onAttach(context: Context) {
-//        super.onAttach(context)
-//        if (context is OnFragmentInteractionListener) {
-//            listener = context
-//        } else {
-//            throw RuntimeException(context.toString() + " must implement OnFragmentInteractionListener")
-//        }
-//    }
-
-
-
-    override fun onDetach() {
-        super.onDetach()
-    }
 
     companion object {
         @JvmStatic

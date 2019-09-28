@@ -2,7 +2,10 @@ package kz.caremet.mentors.android_client_app.repository.sharedPreferences
 
 interface LocalSharedPref {
 
-    fun setCurrentMentorId(mentorId: Int)
-    fun getCurrentMentorId(): Int
-
+    fun setCurrentRealMentorId(mentorId: Int)
+    fun getCurrentRealMentorId(): Int
+    fun getCurrentMentorId(): String?
+    fun setCurrentMentorId(mentorId: String)
+    fun setCurrentMentorName(mentorName:String)
+    fun getCurrentMentorName(): String
 }
