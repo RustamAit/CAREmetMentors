@@ -23,8 +23,8 @@ interface EventDao{
     }
 
 
-    @Query("SELECT * FROM EventFromDb WHERE userId =:senderId")
-    fun getUserChatRooms(senderId: String): Observable<List<DataEntities.EventFromDb>>
+    @Query("SELECT * FROM EventFromDb")
+    fun getUserChatRooms(): Observable<List<DataEntities.EventFromDb>>
 
 
 }

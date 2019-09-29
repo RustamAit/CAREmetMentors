@@ -45,21 +45,28 @@ class ChatFragment : Fragment(), ItemChatRoomListener {
         super.onViewCreated(view, savedInstanceState)
 
         chatRecList.layoutManager = LinearLayoutManager(activity)
-
-
         val dataset = ArrayList<DataEntities.ChatRoomFromDb>()
 
 
 
         chatRoomDao.getUserChatRooms(sharedPref.getCurrentMentorId()!!).observeOn(AndroidSchedulers.mainThread()).subscribe { data ->
             context?.let {
-                dataset.addAll(data)
-                val adapter = ChatAdapter(dataset,it,this)
+                val adapter = ChatAdapter(data,it,this)
                 chatRecList.adapter = adapter
             }
         }
 
-        chatRepositoty.getChatRooms().subscribe()
+        swipeRefresh.setOnRefreshListener {
+            chatRepositoty.getChatRooms().observeOn(AndroidSchedulers.mainThread()).onErrorReturn {
+                emptyList()
+            }.subscribe{ it ->
+                swipeRefresh.isRefreshing = false
+            }
+        }
+
+        chatRepositoty.getChatRooms().onErrorReturn {
+            emptyList()
+        }.subscribe()
 
     }
 

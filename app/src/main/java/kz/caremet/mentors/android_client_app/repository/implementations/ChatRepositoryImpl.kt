@@ -16,7 +16,7 @@ class ChatRepositoryImpl(val chatRoomDao: ChatRoomDao,
                          val sharedPref: LocalSharedPref,
                          val chatRoomService: ChatRoomService): ChatRepositoty{
     override fun getChatRooms(): Single<List<DataEntities.ChatRoomFromApi>> {
-        return chatRoomService.getChatRooms(sharedPref.getCurrentRealMentorId()).subscribeOn(Schedulers.io())
+        return chatRoomService.getChatRooms(sharedPref.getAccessToken(),sharedPref.getCurrentRealMentorId()).subscribeOn(Schedulers.io())
             .map {
                 it.forEach {
                     chatRoomDao.upsertDeal(it.serializeForDb(sharedPref.getCurrentMentorId()!!))
@@ -26,9 +26,7 @@ class ChatRepositoryImpl(val chatRoomDao: ChatRoomDao,
                 }
                 it
             }
-            .onErrorReturn {
-                emptyList()
-            }
+
     }
 
     override fun getChatRoomsFromDB(): Observable<List<DataEntities.ChatRoomFromDb>> {

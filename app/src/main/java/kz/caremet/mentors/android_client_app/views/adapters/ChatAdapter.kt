@@ -47,7 +47,7 @@ class ChatAdapter(val dataset: List<DataEntities.ChatRoomFromDb>,
 
                 else -> {
                     GlideApp.with(context)
-                        .load(R.drawable.ic_person_black_24dp)
+                        .load(R.drawable.ic_customer_service)
                         .placeholder(R.color.colorWhite)
                         .into(itemView.chatRoomAvatar)
                 }

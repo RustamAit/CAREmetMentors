@@ -22,8 +22,10 @@ interface MessageDao {
         }
     }
 
-    @Query("SELECT * FROM messageformdb WHERE chatRoomId=:chatRoomId")
+    @Query("SELECT * FROM messageformdb WHERE chatRoomId=:chatRoomId Order by created_at desc")
     fun getChatRoomMessages(chatRoomId: Int): Observable<List<DataEntities.MessageFormDb>>
+
+
 
     @Query("SELECT * FROM messageformdb WHERE sendStatus =:sendStatus")
     fun getChatRoomMessagesBySendStatus(sendStatus: String): Observable<List<DataEntities.MessageFormDb>>

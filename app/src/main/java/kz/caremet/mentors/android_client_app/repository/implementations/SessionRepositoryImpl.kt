@@ -30,12 +30,13 @@ class SessionRepositoryImpl(private val sharedPref: LocalSharedPref,private val 
             }
     }
 
-    override fun signIn(signInData: DataEntities.SignInData): Single<DataEntities.Mentor>{
+    override fun signIn(signInData: DataEntities.SignInData): Single<DataEntities.SignUpData>{
         return loginService.signIn(signInData).subscribeOn(Schedulers.io())
             .map {
-                mentorDao.upsertDeal(it)
                 setCurrentMentorId(it.real_id)
                 sharedPref.setCurrentMentorId(it.id)
+                sharedPref.setAccessToken(it.access_token)
+                Log.d("TEEEST",it.access_token)
                 it
             }
     }

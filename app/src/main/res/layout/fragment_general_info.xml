@@ -12,9 +12,13 @@
 
 
     <androidx.core.widget.NestedScrollView android:layout_width="match_parent"
-                                           android:layout_height="match_parent">
-        <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
-                                                           android:layout_height="match_parent">
+                                           android:layout_height="match_parent" tools:layout_editor_absoluteY="0dp"
+                                           tools:layout_editor_absoluteX="0dp" android:id="@+id/nestedScrollView">
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/mainContent"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
             <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/nameTextInputLayout"
                     android:layout_width="0dp"
@@ -99,7 +103,6 @@
                         android:inputType="textEmailAddress"
                         android:hint="Email"/>
             </com.google.android.material.textfield.TextInputLayout>
-
 
 
             <com.google.android.material.textfield.TextInputLayout
@@ -207,5 +210,11 @@
     </androidx.core.widget.NestedScrollView>
 
 
-
+    <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+                 android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"
+                 app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+                 app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
+                 android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="@+id/nestedScrollView"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

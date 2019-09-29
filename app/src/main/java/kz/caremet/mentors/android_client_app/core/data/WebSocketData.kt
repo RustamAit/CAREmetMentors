@@ -11,5 +11,6 @@ data class Message(
 
 data class WebSocketData(
       val chat_rooms: List<DataEntities.ChatRoomFromApi>?,
-      val events: List<DataEntities.Event>
+      val events: List<DataEntities.Event>?,
+      val messages: List<DataEntities.MessageFromApi>?
 )

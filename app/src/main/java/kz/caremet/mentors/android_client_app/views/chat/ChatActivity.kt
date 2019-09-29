@@ -3,12 +3,15 @@ package kz.caremet.mentors.android_client_app.views.chat
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.widget.ImageButton
 import android.widget.Toast
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager
+import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import kz.caremet.mentors.android_client_app.R
 
 import kotlinx.android.synthetic.main.activity_chat.*
@@ -33,16 +36,20 @@ class ChatActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat)
         setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         chatRoomId = intent.getIntExtra("chatRoomId", -1)
-        chatRecList.layoutManager = LinearLayoutManager(this)
+        chatRecList.layoutManager = LinearLayoutManager(this).apply {
+            reverseLayout = true
+        }
         if(chatRoomId != -1){
+            Log.d("HELLO_ITS_ME", chatRoomId.toString())
             chatRepositoty.getChatRoomMessagesInDb(chatRoomId).observeOn(AndroidSchedulers.mainThread())
                 .subscribe {
                     val adapter = ChatMessageAdapter(it)
                     chatRecList.adapter = adapter
                 }
-
             chatRepositoty.getChatRooms().subscribe()
         }
 
@@ -72,7 +79,7 @@ class ChatActivity : AppCompatActivity() {
                 inputView.editText?.setText("")
                 inputView.sendBtn?.isEnabled = true
                 chatRecList?.adapter?.let {
-                    chatRecList?.scrollToPosition(it.itemCount+1)
+                    chatRecList?.scrollToPosition(it.itemCount)
                 }
             }
         }
@@ -83,20 +90,24 @@ class ChatActivity : AppCompatActivity() {
     }
 
     fun postAnswer(text: String, chatRoomId: Int){
-        messageDao.upsertDeal(
-            DataEntities.MessageFormDb(
-                generateUUID(),
-                null,
-                chatRoomId,
-                sharedPref.getCurrentMentorId()!!,
-                text,
-                sharedPref.getCurrentMentorName(),
-                "Mentor",
-                getCurrentDateISOString(),
-                DataEntities.StatusConstants.CREATED
 
+        Single.fromCallable {
+            messageDao.upsertDeal(
+                DataEntities.MessageFormDb(
+                    generateUUID(),
+                    null,
+                    chatRoomId,
+                    sharedPref.getCurrentMentorId()!!,
+                    text,
+                    sharedPref.getCurrentMentorName(),
+                    "Mentor",
+                    getCurrentDateISOString(),
+                    DataEntities.StatusConstants.CREATED
+
+                )
             )
-        )
+        }.subscribeOn(Schedulers.io()).subscribe()
+
     }
 
 

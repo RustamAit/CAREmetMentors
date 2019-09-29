@@ -21,11 +21,26 @@ class LocalSharedPrefImpl(private val pref: SharedPreferences): LocalSharedPref{
     }
 
     override fun getCurrentMentorName(): String {
-        return pref.getString("mentorName","неизветный")!!
+        return pref.getString("mentorName","Неизветный чувак")!!
     }
 
     override fun setCurrentMentorName(mentorName: String) {
         pref.edit().putString("mentorName", mentorName).apply()
     }
+
+    override fun clearAllData() {
+        pref.edit().clear().commit()
+    }
+
+
+    override fun getAccessToken(): String? {
+        return pref.getString("accessToken", "toookeen")
+    }
+
+    override fun setAccessToken(token: String) {
+        pref.edit().putString("accessToken", "Bearer $token").commit()
+    }
+
+
 
 }

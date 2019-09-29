@@ -25,8 +25,6 @@ val loginModule = module {
     ) }
     single { get<AppDatabase>().getMentorDao() }
     single { get<AppDatabase>().getEventDao() }
-    single { get<AppDatabase>().getChatRoomDao() }
-    single { get<AppDatabase>().getMessagesDao() }
 
     single { SessionRepositoryImpl(get(),get(),get()) as SessionRepository }
     single { FragmentSharedViewModelImpl() as FragmentSharedViewModel }

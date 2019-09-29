@@ -13,6 +13,7 @@ import kz.caremet.mentors.android_client_app.R
 import kz.caremet.mentors.android_client_app.core.data.DataEntities
 import kz.caremet.mentors.android_client_app.views.adapters.NotificationAdapter
 import kz.caremet.mentors.android_client_app.views.adapters.PostAdapter
+import kz.caremet.mentors.android_client_app.views.adapters.ReportAdapter
 
 class HomeFragment : Fragment() {
 //    private var param1: String? = null
@@ -38,14 +39,32 @@ class HomeFragment : Fragment() {
 
         val notificationDataset = ArrayList<DataEntities.Notification>()
 
-        for(i in 0..3){
             notificationDataset.add(
-                DataEntities.Notification("Очень важное уведомление",
-                "notmalniy",
-                "Это очень важное уведомление в котором мы пытаемся донести очень важную и полезную инфу"))
-        }
+                DataEntities.Notification("У вас новое сообщение",
+                    "message",
+                    "В чатах вы можете найти все последние сообщения")
+               )
+            notificationDataset.add(
+                DataEntities.Notification("Сегодня у вас встреча",
+                    "important",
+                    "Сегодня у вас назначена встреча с ребенком")
+            )
+
+            notificationDataset.add(
+                DataEntities.Notification("Ваш отчет прошел проверку",
+                    "accept",
+                    "если имеются вопросы можете обратится к психологу за помощью")
+            )
+
+            notificationDataset.add(
+                DataEntities.Notification("Ваш отчет не прошел проверку",
+                    "lose",
+                    "Вы можете увидеть комментарии и замечания проверяющего")
+            )
+
+
         notificationRecList?.layoutManager = LinearLayoutManager(activity)
-        notificationRecList?.adapter = NotificationAdapter(notificationDataset)
+        notificationRecList?.adapter = NotificationAdapter(notificationDataset,context!!)
 
     }
 

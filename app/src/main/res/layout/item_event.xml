@@ -4,24 +4,28 @@
         android:orientation="vertical"
         style="@style/Widget.MaterialComponents.CardView"
         android:layout_margin="8dp"
+        android:background="@color/colorWhite"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
+            android:background="@color/colorWhite"
             android:layout_height="wrap_content">
         <TextView
                 android:id="@+id/eventTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginStart="8dp"
-                android:text="Очень интересная история"
+                android:layout_marginEnd="8dp"
+                android:text="Очень интересная встреча"
                 android:visibility="visible"
                 style="@style/TextAppearance.MaterialComponents.Headline6"
-                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/date"
+
         />
 
         <TextView
@@ -30,13 +34,45 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:layout_marginStart="8dp"
-                android:paddingBottom="16dp"
+                android:layout_marginEnd="8dp"
                 android:paddingEnd="24dp"
+                android:paddingBottom="16dp"
                 android:text="Очень описание истории в которой расказщик восторгается эмоциям полученным во время встречи с ребенком"
                 style="@style/TextAppearance.MaterialComponents.Body2"
                 app:layout_constraintTop_toBottomOf="@+id/eventTitle"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginBottom="8dp"
+                />
+
+        <TextView
+                android:id="@+id/date"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:text="Дата не установленна"
+                style="@style/TextAppearance.MaterialComponents.Headline6"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+        />
+
+        <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnnlyat"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:text="Написать отчет"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintVertical_bias="1.0"
+                app:layout_constraintTop_toBottomOf="@+id/eventDescription"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
         />
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -8,5 +8,5 @@ interface SessionRepository {
     fun setCurrentMentorId(mentorId: Int)
     fun getCurrentMentorId(): Int
     fun signUp(questionaryData: DataEntities.QuestionaryData): Single<DataEntities.Mentor>
-    fun signIn(signInData: DataEntities.SignInData): Single<DataEntities.Mentor>
+    fun signIn(signInData: DataEntities.SignInData): Single<DataEntities.SignUpData>
 }

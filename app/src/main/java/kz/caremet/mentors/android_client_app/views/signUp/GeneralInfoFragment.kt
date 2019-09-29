@@ -3,20 +3,27 @@ package kz.caremet.mentors.android_client_app.views.signUp
 import android.app.DatePickerDialog
 import androidx.fragment.app.Fragment
 import android.os.Bundle
+import android.util.AndroidException
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.constraintlayout.widget.ConstraintLayout
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_general_info.*
 import kz.caremet.mentors.android_client_app.R
 import kz.caremet.mentors.android_client_app.core.data.DataEntities
+import kz.caremet.mentors.android_client_app.repository.services.LoginService
 import kz.caremet.mentors.android_client_app.views.signUp.viewModel.FragmentSharedViewModel
 import org.koin.android.ext.android.inject
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 /**
  * A placeholder fragment containing a simple view.
@@ -25,7 +32,8 @@ class GeneralInfoFragment : Fragment() {
 
     val sharedViewModel: FragmentSharedViewModel by inject()
     var dateOfBirth: String? = null
-
+    val loginService: LoginService by inject()
+    val cities: ArrayList<String> = ArrayList()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -35,40 +43,50 @@ class GeneralInfoFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        sharedViewModel.getGeneralInfoData()?.let {
-            nameTextInputEditText?.setText(it.firstName)
-            surnameTextInputEditText?.setText(it.lastName)
-            patronymicTextInputEditText?.setText(it.patronymic)
-            phoneNumberTextInputEditText?.setText(it.phoneNumber)
-            cityTextInputEditText?.setText(it.city)
-            emailTextInputEditText?.setText(it.email)
-            dateOfBirthTextView.text = "Дата рожденья - ${getSimpleDateFromISOString(it.birthData)}"
+        loginService.getCities().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).onErrorReturn {
+            emptyList()
         }
+            .subscribe { it ->
+                it.forEach {
+                    cities.add(it.name)
+                    Log.d("cities_test",it.name)
+                }
+                progressBar?.visibility = ProgressBar.GONE
+                mainContent?.visibility = ConstraintLayout.VISIBLE
 
-        datePickerDialogBtn.setOnClickListener {
-            getCalendar()
-        }
+                sharedViewModel.getGeneralInfoData()?.let {
+                    nameTextInputEditText?.setText(it.firstName)
+                    surnameTextInputEditText?.setText(it.lastName)
+                    patronymicTextInputEditText?.setText(it.patronymic)
+                    phoneNumberTextInputEditText?.setText(it.phoneNumber)
+                    cityTextInputEditText?.setText(it.city)
+                    emailTextInputEditText?.setText(it.email)
+                    dateOfBirthTextView.text = "Дата рожденья - ${getSimpleDateFromISOString(it.birthData)}"
+                }
 
-        doneBtn.setOnClickListener {
-            if(validateData()){
-                sharedViewModel.setGeneralInfoData(
-                    DataEntities.GeneralInfo(
-                        nameTextInputEditText?.text.toString(),
-                        surnameTextInputEditText?.text.toString(),
-                        patronymicTextInputEditText?.text.toString(),
-                        phoneNumberTextInputEditText?.text.toString(),
-                        emailTextInputEditText?.text.toString(),
-                        dateOfBirth,
-                        cityTextInputEditText?.text.toString(),
-                        addressTextInputEditText?.text.toString(),
-                        getDataFromRadioButton()
-                    )
-                )
-                (activity as? GeneralInfoInteractionListener)?.startAboutInfoFragment()
+                datePickerDialogBtn.setOnClickListener {
+                    getCalendar()
+                }
+
+                doneBtn.setOnClickListener {
+                    if(validateData()){
+                        sharedViewModel.setGeneralInfoData(
+                            DataEntities.GeneralInfo(
+                                nameTextInputEditText?.text.toString(),
+                                surnameTextInputEditText?.text.toString(),
+                                patronymicTextInputEditText?.text.toString(),
+                                phoneNumberTextInputEditText?.text.toString(),
+                                emailTextInputEditText?.text.toString(),
+                                dateOfBirth,
+                                cityTextInputEditText?.text.toString(),
+                                addressTextInputEditText?.text.toString(),
+                                getDataFromRadioButton()
+                            )
+                        )
+                        (activity as? GeneralInfoInteractionListener)?.startAboutInfoFragment()
+                    }
+                }
             }
-        }
-
     }
 
     fun validateData(): Boolean{
@@ -113,9 +131,8 @@ class GeneralInfoFragment : Fragment() {
         }
         if(!cityTextInputEditText?.text.isNullOrEmpty()){
             val city = cityTextInputEditText.text.toString()
-            val cities = arrayOf("москва", "санкт-петербург", "самара", "новосибирск")
             Log.d("cities_tag", city)
-            if(!cities.contains(city.toLowerCase())){
+            if(!cities.contains(city)){
                 activity?.let {
                     AlertDialog.Builder(it)
                         .setTitle("К сожалению нас нет в вашем городе")

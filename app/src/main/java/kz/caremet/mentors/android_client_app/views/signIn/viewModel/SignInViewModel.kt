@@ -5,5 +5,5 @@ import kz.caremet.mentors.android_client_app.core.data.DataEntities
 
 interface SignInViewModel {
 
-    fun signIn(singInData: DataEntities.SignInData): Single<DataEntities.Mentor>
+    fun signIn(singInData: DataEntities.SignInData): Single<DataEntities.SignUpData>
 }

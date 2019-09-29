@@ -28,6 +28,12 @@ object DataEntities {
        // val city: String?
     )
 
+    data class SignUpData(
+        val access_token: String,
+        val id: String,
+        val real_id: Int
+    )
+
     @Entity
     data class SignInData(
         val email: String,
@@ -107,7 +113,7 @@ object DataEntities {
     data class ChatRoomFromApi(
         val id: Int,
         val name: String,
-        val type: String,
+        val type: String?,
         val messages: List<MessageFromApi>
     ){
         fun serializeForDb(currentUserId: String): ChatRoomFromDb {
@@ -121,8 +127,13 @@ object DataEntities {
     data class ChatRoomFromDb(
         @PrimaryKey val id: Int,
         val name: String,
-        val type: String,
+        val type: String?,
         val userId: String
+    )
+
+    data class City(
+        val id: Int,
+        val name: String
     )
 
     @Entity
@@ -139,9 +150,9 @@ object DataEntities {
     )
 
     data class MessageFromApi(
-        @PrimaryKey val uuid: String,
+        @PrimaryKey val uuid: String?,
         val id: Int?,
-        val chatRoomId: Int,
+        val chat_room_id: Int,
         val sender: Mentor,
         val text: String,
         val created_at: String
@@ -149,15 +160,15 @@ object DataEntities {
     ){
         fun serializeForDb(): MessageFormDb {
             return MessageFormDb(
-                uuid,
+                uuid?:id.toString(),
                 id,
-                chatRoomId,
+                chat_room_id,
                 sender.id,
                 text,
                 sender.firstName + sender.lastName,
                 sender.type,
                 created_at,
-                StatusConstants.CREATED
+                StatusConstants.DELIVIRED
             )
         }
     }
@@ -172,14 +183,14 @@ object DataEntities {
         @PrimaryKey val id: Int,
         val type: String?,
         val date: String?,
-        val attendee: Mentor,
+        val attendee: Mentor?,
         val title: String,
         val description: String?,
         val created_at: String
     ){
         fun serializeForDb(): EventFromDb{
             return EventFromDb(
-                this.id,this.type,this.date,this.title,this.description,this.attendee.id,this.created_at
+                this.id,this.type,this.date,this.title,this.description,this.attendee?.id,this.created_at
             )
         }
     }
@@ -191,7 +202,7 @@ object DataEntities {
         val date: String?,
         val title: String,
         val description: String?,
-        val userId: String,
+        val userId: String?,
         val created_at: String
     )
     object StatusConstants{
@@ -201,5 +212,20 @@ object DataEntities {
         const val FAILED = "FAILED"
     }
 
+
+    @Entity
+    data class Report(
+        @PrimaryKey val id: Int,
+        val title: String,
+        val created_at: String?,
+        val event_id: Int,
+        val text: String,
+        val status: String?
+    )
+
+    data class ReportForPost(
+        val title: String,
+        val text: String
+    )
 
 }

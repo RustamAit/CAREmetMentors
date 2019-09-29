@@ -36,6 +36,7 @@ class ChatMessageAdapter(val dataset: List<DataEntities.MessageFormDb>): Recycle
                 itemView.isSended.visibility = ImageView.GONE
             }
 
+            itemView.senderPhotoText.text = p.sender_name[0].toString()
 
 //            itemView.notificationTitle.text = p.title
 //            itemView.notificationDescription.text = p.description

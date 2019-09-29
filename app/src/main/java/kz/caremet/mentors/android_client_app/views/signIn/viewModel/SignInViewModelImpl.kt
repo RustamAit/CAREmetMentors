@@ -6,10 +6,12 @@ import kz.caremet.mentors.android_client_app.repository.interfaces.SessionReposi
 
 class SignInViewModelImpl(val repository: SessionRepository): SignInViewModel {
 
-    override fun signIn(singInData: DataEntities.SignInData): Single<DataEntities.Mentor> = repository.signIn(singInData).onErrorReturn {
-        DataEntities.Mentor(
-            "0",
-            10000,"sdfsdf",null,null,null,null,null,null
+    override fun signIn(singInData: DataEntities.SignInData): Single<DataEntities.SignUpData> = repository.signIn(singInData).onErrorReturn {
+        DataEntities.SignUpData(
+            "asdasdas",
+            "aasd",
+            0
+
         )
     }
 

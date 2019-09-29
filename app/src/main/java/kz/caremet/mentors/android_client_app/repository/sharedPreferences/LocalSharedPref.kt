@@ -8,4 +8,7 @@ interface LocalSharedPref {
     fun setCurrentMentorId(mentorId: String)
     fun setCurrentMentorName(mentorName:String)
     fun getCurrentMentorName(): String
+    fun getAccessToken(): String?
+    fun setAccessToken(token: String)
+    fun clearAllData()
 }

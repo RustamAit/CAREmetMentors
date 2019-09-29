@@ -34,7 +34,7 @@ class LaunchScreenActivity : AppCompatActivity() {
 
         if(sharedPref.getCurrentRealMentorId() != 0 && sharedPref.getCurrentMentorId() != null){
             Log.d("DATA_TEST", sharedPref.getCurrentRealMentorId().toString())
-            startActivity(Intent(this, MainActivity::class.java))
+            startActivity(Intent(this, MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK))
         }
 
 

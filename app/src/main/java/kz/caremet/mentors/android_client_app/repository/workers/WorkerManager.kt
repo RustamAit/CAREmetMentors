@@ -22,7 +22,8 @@ object WorkerManager: KoinComponent {
                 val data = workDataOf(
                     "text" to message.text,
                     "uuid" to message.uuid,
-                    "senderId" to sharedPref.getCurrentRealMentorId()
+                    "senderId" to sharedPref.getCurrentRealMentorId(),
+                    "chatRoomId" to message.chatRoomId
                 )
                 val oneTimeRequest = OneTimeWorkRequestBuilder<MessageWorker>()
                     .setInputData(data)

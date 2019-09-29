@@ -23,14 +23,14 @@ val coreModule = module {
     }
     single { LocalSharedPrefImpl(get()) as LocalSharedPref }
 
-    single { createOkHttpClient() }
+    single { createOkHttpClient(androidContext()) }
 
 
     single(named("foregroundWithLogin")) { AndroidLifecycle.ofApplicationForeground(get())}
 }
 
 
-val appModules = listOf(coreModule, loginModule)
+val appModules = listOf(coreModule, loginModule, chatModule)
 
 fun createSharedPreferences(context: Context) : SharedPreferences {
     return context.applicationContext.getSharedPreferences(Constants.preference, Context.MODE_PRIVATE)
