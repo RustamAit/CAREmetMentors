@@ -33,11 +33,11 @@ class ReportFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        rRecList.layoutManager = LinearLayoutManager(activity)
+        rRecList?.layoutManager = LinearLayoutManager(activity)
 
         chatRoomService.getReports(sharedPref.getCurrentRealMentorId()).onErrorReturn { emptyList() }.subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread()).subscribe { it ->
-                rRecList.adapter = ReportAdapter(it)
+                rRecList?.adapter = ReportAdapter(it)
             }
     }
 

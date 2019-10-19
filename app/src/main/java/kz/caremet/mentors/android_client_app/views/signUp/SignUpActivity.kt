@@ -36,7 +36,7 @@ class SignUpActivity : AppCompatActivity(), GeneralInfoInteractionListener {
             .beginTransaction()
             .replace(R.id.signUpFragmentContainer, SliderFragment.newInstance(
                 "Спасибо мы с вами свяжемся",
-            "Наши специалисты проверят ваши данные, затем свяжутся с вами\n" +
+            "Наши специалисты проверят ваши данные, затем свяжутся с вами на почту придет письмо с паролем\n" +
                     "я знаю что картинка зашакалена, если успею сделаю нормально",
                 SliderFragmentType.SUCCESS
             ))
